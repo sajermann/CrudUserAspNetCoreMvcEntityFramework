@@ -1,0 +1,165 @@
+﻿@model Crud.Models.Usuario
+
+@{
+    ViewData["Title"] = "Cadastro";
+}
+
+<h4>Cadastro de Usuário</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Cadastrar">
+            @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
+            <div class="form-group">
+                <label asp-for="Nome" class="control-label"></label>
+                <input asp-for="Nome" class="form-control" required />
+
+            </div>
+            <div class="form-group">
+                <label asp-for="Sobrenome" class="control-label"></label>
+                <input asp-for="Sobrenome" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label asp-for="Cpf" class="control-label">CPF</label>
+                <input asp-for="Cpf" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label asp-for="DataNascimento" class="control-label">Data Nascimento</label>
+                <input asp-for="DataNascimento" type="date" class="form-control" required />
+                <div class="form-group"><span class="text-danger">@ViewBag.ErrorDate</span></div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cep" class="control-label">CEP</label>
+                <input asp-for="Cep" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label asp-for="Endereco" class="control-label">Endereço</label>
+                <input asp-for="Endereco" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label asp-for="Numero" class="control-label">Número</label>
+                <input asp-for="Numero" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label asp-for="Complemento" class="control-label"></label>
+                <input asp-for="Complemento" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label asp-for="Cidade" class="control-label"></label>
+                <input asp-for="Cidade" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label asp-for="Estado" class="control-label"></label>
+                <select asp-for="Estado" class="form-control" required>
+                    <option value="AC">Acre</option>
+                    <option value="AL">Alagoas</option>
+                    <option value="AP">Amapá</option>
+                    <option value="AM">Amazonas</option>
+                    <option value="BA">Bahia</option>
+                    <option value="CE">Ceará</option>
+                    <option value="DF">Distrito Federal</option>
+                    <option value="ES">Espírito Santo</option>
+                    <option value="GO">Goiás</option>
+                    <option value="MA">Maranhão</option>
+                    <option value="MT">Mato Grosso</option>
+                    <option value="MS">Mato Grosso do Sul</option>
+                    <option value="MG">Minas Gerais</option>
+                    <option value="PA">Pará</option>
+                    <option value="PB">Paraíba</option>
+                    <option value="PR">Paraná</option>
+                    <option value="PE">Pernambuco</option>
+                    <option value="PI">Piauí</option>
+                    <option value="RJ">Rio de Janeiro</option>
+                    <option value="RN">Rio Grande do Norte</option>
+                    <option value="RS">Rio Grande do Sul</option>
+                    <option value="RO">Rondônia</option>
+                    <option value="RR">Roraima</option>
+                    <option value="SC">Santa Catarina</option>
+                    <option value="SP">São Paulo</option>
+                    <option value="SE">Sergipe</option>
+                    <option value="TO">Tocantins</option>
+                    <option value="EX">Estrangeiro</option>
+                </select>
+            </div>
+            <div class="form-group"><span class="text-danger">@ViewBag.Error</span></div>
+            <div class="form-group">
+                <input type="submit" value="Cadastrar" class="btn btn-success" />
+                <a asp-action="Index" class="btn btn-danger">Voltar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Parabéns</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @ViewBag.Success
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@{
+    if (ViewBag.Success == "Registro Salvo com Sucesso")
+    {
+        <script>
+            
+            document.addEventListener("DOMContentLoaded", () => {
+                $('#exampleModalLong').modal({ show: true });
+                $('#exampleModalLong').on('hidden.bs.modal', function (e) {
+                    window.location.href = "/Home/Index";
+                })
+            })
+            
+        </script>
+    }
+ }
+
+
+
+@{
+    if (Environment.MachineName == "DESKTOP-AUDO4CF")
+    {
+        <style>
+            .buttonDevelop { position: fixed; top: 10px; right: 10px; }
+        </style>
+        <button class="btn btn-info buttonDevelop">Preencher</button>
+
+        <script>
+            document.querySelector('.buttonDevelop').addEventListener('click', () => {
+                document.querySelector('#Nome').value = 'Bruno';
+                document.querySelector('#Sobrenome').value = 'Sajermann';
+                document.querySelector('#Cpf').value = '36357365869';
+                document.querySelector('#DataNascimento').value = '1991-05-31';
+                document.querySelector('#Cep').value = '08673-115';
+                document.querySelector('#Endereco').value = 'Av. Armando Salles de Oliveira';
+                document.querySelector('#Numero').value = 2160;
+                document.querySelector('#Complemento').value = 'Ap 28, BL 05';
+                document.querySelector('#Cidade').value = 'Suzano';
+                document.querySelector('#Estado').value = 'SP';
+            });
+        </script>
+
+    }
+}
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

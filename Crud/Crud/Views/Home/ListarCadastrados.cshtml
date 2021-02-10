@@ -1,0 +1,135 @@
+﻿@model IEnumerable<Crud.Models.Usuario>
+
+@{
+    ViewData["Title"] = "Consultar Cadastrados";
+}
+
+<h1>Consultar Cadastrados</h1>
+
+<p>
+    <a asp-action="Cadastrar">Criar Novo</a>
+</p>
+<table class="table" width="100%">
+    <thead>
+        <tr>
+            <th>Ações</th>
+            <th>
+                Nome Completo
+            </th>
+            <th>
+                CPF
+            </th>
+            <th>
+                Data Nasc.
+            </th>
+            <th>
+                Endereço Completo
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <a asp-action="EditarUsuario" asp-route-id="@item.Id">Editar</a>
+            </td>
+            <td>
+                @item.Nome.Trim() @item.Sobrenome.Trim() 
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cpf)
+            </td>
+            <td>
+                @item.DataNascimento.ToString("dd/MM/yyyy")
+            </td>
+            <td>
+                @item.Endereco.Trim(), @item.Numero, @item.Complemento.Trim() - @item.Cidade.Trim()/@item.Estado - @item.Cep.Trim()
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+    $(`.table`).DataTable({
+        "scrollX": true,
+        dom: 'Blfrtip',
+        order: [],
+        "columnDefs": [
+            { "orderable": false },
+        ],
+        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "Todos"]],
+        buttons: [
+            {
+                extend: 'copy',
+                exportOptions: {
+                    columns: [1, 2, 3, 4],
+                    modifier: {
+                        //page: 'current'
+                    }
+                }
+            },
+            {
+                extend: 'excel',
+                text: 'Excel',
+                exportOptions: {
+                    columns: [1, 2, 3, 4],
+                    modifier: {
+                        //page: 'current'
+                    }
+                }
+            },
+            {
+                extend: 'pdfHtml5',
+                text: 'Pdf',
+                //orientation: config.orientation,
+                exportOptions: {
+                    columns: [1, 2, 3, 4],
+                }
+            },
+        ],
+        "language": {
+            "sEmptyTable": "Nenhum registro encontrado",
+            "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+            "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sInfoThousands": ".",
+            "sLengthMenu": "_MENU_ Resultados por página",
+            "sLoadingRecords": "Carregando...",
+            "sProcessing": "Processando...",
+            "sZeroRecords": "Nenhum registro encontrado",
+            "sSearch": "Pesquisar",
+            "oPaginate": {
+                "sNext": "Próximo",
+                "sPrevious": "Anterior",
+                "sFirst": "Primeiro",
+                "sLast": "Último"
+            },
+            "oAria": {
+                "sSortAscending": ": Ordenar colunas de forma ascendente",
+                "sSortDescending": ": Ordenar colunas de forma descendente"
+            },
+            "select": {
+                "rows": {
+                    "_": "Selecionado %d linhas",
+                    "0": "Nenhuma linha selecionada",
+                    "1": "Selecionado 1 linha"
+                }
+            },
+            "buttons": {
+                "copy": "Copiar",
+                "copyTitle": "Cópia bem sucedida",
+                "copySuccess": {
+                    "1": "Uma linha copiada com sucesso",
+                    "_": "%d linhas copiadas com sucesso"
+                }
+            }
+        }
+    });
+});
+
+</script>

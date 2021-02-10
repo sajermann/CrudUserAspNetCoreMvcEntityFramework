@@ -1,0 +1,25 @@
+﻿@model Crud.Models.Usuario
+
+@{
+    ViewData["Title"] = "CRUD";
+}
+
+<style>
+    h4{ text-align: center}
+    .buttons { width: 350px; height: 250px; font-size: 60px; display: flex; align-items: center; justify-content: center; margin: 10px}
+    .divCol { display: flex; align-items: center; justify-content: center; }
+</style>
+
+<h4>Bem vindo ao sistema de usuários</h4>
+<hr />
+<div class="col divCol">
+    <div class="row">
+        <a class="buttons btn btn-outline-success" asp-action="Cadastrar">Cadastrar</a>
+        <a class="buttons btn btn-outline-info" asp-action="ListarCadastrados">Consultar</a>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
